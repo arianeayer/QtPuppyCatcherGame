@@ -33,6 +33,7 @@ signals:
     void wonGame();
     void mediumGame();
     void hardGame();
+    void returnMenu();
 
 public:
     explicit gameBoard(QWidget *parent=0, size_t board_size = 10, size_t dog_speed = 3);
