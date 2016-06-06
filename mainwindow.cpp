@@ -45,7 +45,18 @@ void MainWindow::gameOver() {
     wid->setParent(nullptr);
     // Line above will delete the widget gracefully (no memory errors)
     ui->setupUi(this);
-    //lostGame();
+    this->lostGame();
+}
+
+/**
+ * exit game, return to menu
+ */
+void MainWindow::returnMenu() {
+    // Take the current board game out of the central widget of MainWindow
+    QWidget* wid = this->centralWidget();
+    wid->setParent(nullptr);
+    // Line above will delete the widget gracefully (no memory errors)
+    ui->setupUi(this);
 }
 
 /**
