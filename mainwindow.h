@@ -34,6 +34,7 @@ public slots:
     void wonGame();
     void lostGame();
 
+    void returnMenu();
 
 private:
     Ui::MainWindow *ui;
