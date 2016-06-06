@@ -146,7 +146,7 @@ gameBoard::gameBoard(QWidget *parent, size_t board_sz, size_t dog_spd) :
       piece_together->addWidget(Board,0,Qt::AlignCenter);
 
       QPushButton* quit = new QPushButton("Quit");
-      QObject::connect(quit, SIGNAL(clicked()), parent, SLOT(gameOver()));
+      QObject::connect(quit, SIGNAL(clicked()), parent, SLOT(returnMenu()));
 
       piece_together->addWidget(quit);
 
@@ -224,6 +224,8 @@ gameBoard::gameBoard(QWidget *parent, size_t board_sz, size_t dog_spd) :
      connect(this, SIGNAL(wonGame()), parent, SLOT(wonGame()));
        connect(this, SIGNAL(mediumGame()), parent, SLOT(mediumGame()));
        connect(this, SIGNAL(hardGame()), parent, SLOT(hardGame()));
+       connect(this, SIGNAL(returnMenu()), parent, SLOT(returnMenu()));
+
 
       QTimer *timer = new QTimer(this);
       connect(timer, SIGNAL(timeout()), this, SLOT(updateDogs()));
@@ -405,7 +407,7 @@ void gameBoard::updateAvatar(int px, int py, int nx, int ny) {
                 life_counter[life_count-1]->clear();
             }
             else {
-                this->lostGame();
+                //this->lostGame();
                 this->gameOver();
                 life_count = 4;
 
@@ -486,19 +488,19 @@ void gameBoard::updateAfterCatch(bool flag) {
          else {
             wonGame();
             if (gametype_indicator == 1) {
-                this->gameOver();
+                this->close();
                 life_count = 4;
                 this->mediumGame();
 
             }
             if (gametype_indicator == 2) {
-                this->gameOver();
+                this->close();
                  life_count = 4;
                 this->hardGame();
 
             }
             if (gametype_indicator == 3) {
-                this->gameOver();
+                this->returnMenu();
             }
         }
     }
@@ -614,7 +616,7 @@ void gameBoard::updateDogs() {
                         else {
                             this->gameOver();
                             life_count = 4;
-                            this->lostGame();
+                            //this->lostGame();
 
                        }
                     }
